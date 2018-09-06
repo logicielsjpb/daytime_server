@@ -18,7 +18,6 @@ void TCPServer::start_accept()
   TCPConnection::pointer new_connection =
   TCPConnection::create(acceptor_.get_executor().context());
   
-  // TODO - Add timeout
   acceptor_.async_accept(new_connection->socket(),
                          boost::bind(&TCPServer::handle_accept, this, new_connection,
                                      boost::asio::placeholders::error));

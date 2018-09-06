@@ -11,7 +11,6 @@
 #include "tcp_connection.hpp"
 
 #include <boost/asio.hpp>
-#include <boost/thread.hpp>
 
 using boost::asio::ip::tcp;
 

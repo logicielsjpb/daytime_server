@@ -2,7 +2,12 @@
 // server.cpp
 // ~~~~~~~~~~
 //
-// Create a DayTime server using boost asio library to 
+// Create a DayTime server using boost asio library. The server responds to
+// three commands:
+//   - date: return the current date in format yyyy-mm-dd
+//   - time: return the current time in format hh:mm:ss, timezone
+//   - datetime: return the current date and time in format yyyy-mm-ddhh:mm:ss, timezone
+//
 // Based on 2003-2017 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
@@ -14,9 +19,6 @@
 #include "tcp_server.hpp"
 #include "udp_server.hpp"
 #include "defines.h"
-
-//#include <boost/thread.hpp>
-
 
 int main(int argc, char* argv[])
 {
@@ -35,7 +37,6 @@ int main(int argc, char* argv[])
     std::cout << "Starting UDP Server on port " << port << std::endl;
     UDPServer server2(io_context, port);
     io_context.run();
-    // Join threads
   } catch (std::exception& e) {
     std::cerr << e.what() << std::endl;
   }

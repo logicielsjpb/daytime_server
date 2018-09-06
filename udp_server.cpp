@@ -5,10 +5,10 @@
 //  Created by Jean-Philippe Boily on 2018-09-05.
 //
 
-#include "udp_server.hpp"
-#include "request_parser.hpp"
 #include <string>
 #include <iostream>
+#include "udp_server.hpp"
+#include "request_parser.hpp"
 
 UDPServer::UDPServer(boost::asio::io_context& io_context, int port)
 : socket_(io_context, udp::endpoint(udp::v6(), port))
@@ -18,8 +18,7 @@ UDPServer::UDPServer(boost::asio::io_context& io_context, int port)
 
 void UDPServer::start_receive()
 {
-  socket_.async_receive_from(
-                             boost::asio::buffer(recv_buffer_), remote_endpoint_,
+  socket_.async_receive_from(boost::asio::buffer(recv_buffer_), remote_endpoint_,
                              boost::bind(&UDPServer::handle_receive, this,
                                          boost::asio::placeholders::error,
                                          boost::asio::placeholders::bytes_transferred));

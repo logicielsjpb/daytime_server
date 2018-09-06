@@ -51,7 +51,7 @@ private:
   
   void send_response(const std::string& response);
 
-  std::string create_response_from_buffer();
+  std::string get_response();
   
   bool stopped_;
   tcp::socket socket_;
