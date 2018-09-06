@@ -31,10 +31,8 @@ int main(int argc, char* argv[])
   
     boost::asio::io_context io_context;
     std::cout << "Starting TCP Server on port " << port << std::endl;
-    // Launch thread boost::thread t()
     TCPServer server1(io_context, port);
     std::cout << "Starting UDP Server on port " << port << std::endl;
-    // Launch thread boost::thread t()
     UDPServer server2(io_context, port);
     io_context.run();
     // Join threads

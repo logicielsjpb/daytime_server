@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
   *resolver.resolve(udp::v4(), argv[1], "daytime").begin();
   
   udp::socket socket(io_context);
-  socket.open(udp::v4());
+  socket.open(udp::v6());
   
   boost::array<char, 1> send_buf  = {{ 0 }};
   socket.send_to(boost::asio::buffer(send_buf), receiver_endpoint);

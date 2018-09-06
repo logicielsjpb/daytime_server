@@ -14,6 +14,8 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
 
+#include "defines.h"
+
 using boost::asio::ip::udp;
 
 class UDPServer
@@ -24,13 +26,15 @@ public:
 private:
   void start_receive();
   
-  void handle_receive(const boost::system::error_code& error);
+  void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
   
-  void handle_send(boost::shared_ptr<std::string>);
+  void handle_send(const boost::system::error_code& error);
+  
+  std::string buffer_to_str(std::size_t bytes_transferred);
   
   udp::socket socket_;
   udp::endpoint remote_endpoint_;
-  boost::array<char, 1> recv_buffer_;
+  boost::array<char, REQUEST_MAX_LEN> recv_buffer_;
 };
 
 #endif /* udp_server_hpp */

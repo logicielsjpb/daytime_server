@@ -20,6 +20,10 @@ namespace RequestParser {
   static std::string parse(const std::string& request)
   {
     // TODO - It might be a good idea to move the response generation from the parser
+    if (request.empty()) {
+      return "";
+    }
+  
     using std::chrono::system_clock;
     std::time_t tt = system_clock::to_time_t (system_clock::now());
     std::stringstream ssTp;

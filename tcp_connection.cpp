@@ -5,6 +5,8 @@
 //  Created by Jean-Philippe Boily on 2018-09-05.
 //
 #include "tcp_connection.hpp"
+#include "request_parser.hpp"
+#include <iostream>
 
 using boost::asio::deadline_timer;
 
@@ -47,7 +49,7 @@ void TCPConnection::process_command() {
 void TCPConnection::send_response(const std::string& response)
 {
   if (!response.empty()) {
-    std::cout << "Sending response: " << response << std::endl;
+    std::cout << "(TCPConnection " << this << ") Sending response: " << response << std::endl;
     boost::asio::async_write(socket_, boost::asio::buffer(response),
                              boost::bind(&TCPConnection::handle_write,
                                          shared_from_this(),
@@ -58,6 +60,7 @@ void TCPConnection::send_response(const std::string& response)
 }
 
 void TCPConnection::stop() {
+  std::cout << "(TCPConnection " << this << ") Connection timeout." << std::endl;
   stopped_ = true;
   boost::system::error_code ignored_ec;
   socket_.close(ignored_ec);
