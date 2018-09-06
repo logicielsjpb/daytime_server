@@ -25,3 +25,4 @@ reality, we should have different behaviours based on error codes.
 * The commands could come from a configuration file instead of hardcoding them in a static
 object like we do in the Command class. This would be easier to change the format and add
 new commands.
+* I fixed the max buffer lenght for the request to 128 bytes. Since our commands have at most 8 bytes, it could be reduced.
