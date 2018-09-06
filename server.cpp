@@ -13,7 +13,10 @@
 #include <boost/asio.hpp>
 #include "tcp_server.hpp"
 #include "udp_server.hpp"
+#include "defines.h"
+
 //#include <boost/thread.hpp>
+
 
 int main(int argc, char* argv[])
 {

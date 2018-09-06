@@ -9,12 +9,14 @@
 #define tcp_connection_h
 
 #include <string>
+#include <iostream>
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/bind.hpp>
 
+#include "defines.h"
 #include "request_parser.hpp"
 
 using boost::asio::ip::tcp;
@@ -38,16 +40,25 @@ public:
   
 private:
   TCPConnection(boost::asio::io_context& io_context)
-  : socket_(io_context) {}
+  : stopped_(false),
+    socket_(io_context),
+    request_(REQUEST_MAX_LEN),
+    deadline_(io_context) {}
   
-  void handle_write();
-  
-  void handle_read(const boost::system::error_code& error, size_t bytes_transferred);
+  void handle_write(const boost::system::error_code& error);
 
-  std::string create_response_from_buffer(boost::asio::streambuf req);
+  void handle_read(const boost::system::error_code& error);
   
+  void process_command();
+  
+  void send_response(const std::string& response);
+
+  std::string create_response_from_buffer();
+  
+  bool stopped_;
   tcp::socket socket_;
-  boost::asio::streambuf request;
+  boost::asio::streambuf request_;
+  boost::asio::deadline_timer deadline_;
 };
 
 
