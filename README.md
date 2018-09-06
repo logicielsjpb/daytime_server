@@ -7,6 +7,15 @@ connections at the same time, letting asio handle the synchronization for us.
 I left some debugging statements in the code to help figure out what is happening. I could 
 have used a logging library, but felt it was a bit unecessary for the scope of this program.
 
+## Prerequisites
+Project was built using the following libraries and tools
+
+* AppleClang 9.1.0.902003
+* CMake 3.12.1
+* Boost 1.68.0
+* XCode 9.4.1
+* Mac OS High Sierra (10.13.6)
+
 ## Improvements
 
 * We could do more error verifications. For now, we simply check if there was an error, but in 
