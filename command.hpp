@@ -18,7 +18,8 @@ public:
   static CmdMap commands_;
   
 private:
-  static CmdMap init_map() {
+  static CmdMap init_map()
+  {
     CmdMap cmd_map;
     cmd_map.insert(std::pair<std::string, const char*>("date", "%F"));
     cmd_map.insert(std::pair<std::string, const char*>("time", "%T, %Z"));

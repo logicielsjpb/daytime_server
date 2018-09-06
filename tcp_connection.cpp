@@ -58,14 +58,16 @@ void TCPConnection::send_response(const std::string& response)
   }
 }
 
-void TCPConnection::stop() {
+void TCPConnection::stop()
+{
   std::cout << "(TCPConnection " << this << ") Connection timeout." << std::endl;
   boost::system::error_code ignored_ec;
   socket_.close(ignored_ec);
   deadline_.cancel();
 }
 
-std::string TCPConnection::get_response()  {
+std::string TCPConnection::get_response()
+{
   std::istream request_stream(&request_);
   std::string command;
   request_stream >> command;

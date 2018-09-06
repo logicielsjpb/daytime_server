@@ -38,8 +38,7 @@ public:
   
 private:
   TCPConnection(boost::asio::io_context& io_context)
-  : stopped_(false),
-    socket_(io_context),
+  : socket_(io_context),
     request_(REQUEST_MAX_LEN),
     deadline_(io_context) {}
   
@@ -53,7 +52,6 @@ private:
 
   std::string get_response();
   
-  bool stopped_;
   tcp::socket socket_;
   boost::asio::streambuf request_;
   boost::asio::deadline_timer deadline_;
